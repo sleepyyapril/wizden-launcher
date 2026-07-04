@@ -1,3 +1,4 @@
+using Serilog;
 using System;
 using SS14.Launcher.Utility;
 
@@ -68,6 +69,7 @@ public static class ConfigConstants
         var envVarAuthUrl = Environment.GetEnvironmentVariable("SS14_LAUNCHER_OVERRIDE_AUTH");
         if (!string.IsNullOrEmpty(envVarAuthUrl))
         {
+            Log.Information("Auth override envar detected. Switching to: {AuthUrl}", envVarAuthUrl);
             AuthUrl = new UrlFallbackSet([envVarAuthUrl]);
 #if !DEBUG
             IsAuthOverride = true;
